@@ -93,20 +93,40 @@ const createScene = function () {
     // when the a and d keys are pressed, the camera will rotate
     scene.actionManager = new BABYLON.ActionManager(scene);
     scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyDownTrigger, function (evt) {
-        if (evt.sourceEvent.key === "a" && camera.rotation.y > -0.4000000000000002) {
+        if (evt.sourceEvent.key === "a" && camera.rotation.y > -0.5) {
             camera.rotation.y -= 0.01;
         }
-        if (evt.sourceEvent.key === "d" && camera.rotation.y < 0.41000000000000014) {
+        if (evt.sourceEvent.key === "d" && camera.rotation.y < 0.5) {
             camera.rotation.y += 0.01;
         }
     }
     ));
 
-    var light = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(-2, -3, 1), scene);
-    light.position = new BABYLON.Vector3(1, 1, 1);
+    var light = new BABYLON.PointLight("light", new BABYLON.Vector3(0, 0, 0), scene);
+    light.position = new BABYLON.Vector3(12, 7, 10);
+    light.specular = new BABYLON.Color3(1, 1, 1);
+    light.intensity = 1;
+    var light = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 0, 0), scene);
+    light.position = new BABYLON.Vector3(-12, 7, -10);
+    light.specular = new BABYLON.Color3(1, 1, 1);
+    light.intensity = 1;
+
     var generator = new BABYLON.ShadowGenerator(512, light);
     generator.useBlurExponentialShadowMap = true;
     generator.blurKernel = 32;
+    generator.blurScale = 2;
+    generator.usePoissonSampling = true;
+    generator.bias = 0.01;
+    generator.forceBackFacesOnly = true;
+    generator.useKernelBlur = true;
+    generator.useBlurExponentialShadowMap = true;
+    generator.addShadowCaster(wallup);
+    generator.addShadowCaster(walldown);
+    generator.addShadowCaster(_wallleft);
+    generator.addShadowCaster(_wallright);
+    generator.addShadowCaster(_walltop);
+    generator.addShadowCaster(_wallbottom);
+    generator.addShadowCaster(window);
 
     return scene;
 };
