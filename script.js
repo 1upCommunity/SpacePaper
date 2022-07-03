@@ -10,6 +10,10 @@ function createMaterials(scene, meshes, lights){
     const _eqTexture = new BABYLON.EquiRectangularCubeTexture('assets/skybox.jpg', scene, 512);
     const eqTexture = new BABYLON.EquiRectangularCubeTexture('assets/milky_way.jpg', scene, 512);
 
+    for (var i = 0; i < meshes.length; i++) {
+        meshes[i].checkCollisions = true;
+    }
+
     var water = new BABYLON.WaterMaterial("water_material", scene);
     water.backFaceCulling = false;
 	water.bumpTexture = new BABYLON.Texture("assets/waterbump.png", scene);
