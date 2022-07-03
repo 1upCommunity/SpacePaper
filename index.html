@@ -20,17 +20,19 @@
         touch-action: none;
       }
     </style>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
     <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
     <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    <script src='http://joeiddon.github.io/perlin/perlin.js'></script>
+    <script src="objects.js"> </script>
   </head>
 
   <body>
-    <canvas id="renderCanvas" touch-action="none"></canvas>
+    <canvas id="renderCanvas">
+    </canvas>
     <!-- touch-action="none" for best results from PEP -->
-
     <script type="module" src="script.js"> </script>
   </body>
 </html>
