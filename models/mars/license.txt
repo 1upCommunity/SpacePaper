@@ -1,0 +1,11 @@
+Model Information:
+* title:	Mars
+* source:	https://sketchfab.com/3d-models/mars-7b14d8d8a5b94626a4b2a8a4455297d6
+* author:	kongle (https://sketchfab.com/minecraftnorge)
+
+Model License:
+* license type:	CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)
+* requirements:	Author must be credited. Modified versions must have the same license. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Mars" (https://sketchfab.com/3d-models/mars-7b14d8d8a5b94626a4b2a8a4455297d6) by kongle (https://sketchfab.com/minecraftnorge) licensed under CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)

@@ -17,12 +17,12 @@ function createMaterials(scene, meshes, lights){
     var water = new BABYLON.WaterMaterial("water_material", scene);
     water.backFaceCulling = false;
 	water.bumpTexture = new BABYLON.Texture("assets/waterbump.png", scene);
-	water.windForce = 1;
-	water.waveHeight = 0.2;
-	water.bumpHeight = 100;
+	water.windForce = 20;
+	water.waveHeight = 0.0;
+	water.bumpHeight = 1;
     water.bumpLength = 6;
 	water.waveLength = 0.8;
-	water.colorBlendFactor = 0;
+	water.colorBlendFactor = 0.2;
     water.alpha = 0.5;
     for (var i = 0; i < meshes.length; i++) {
         water.addToRenderList(meshes[i]);
@@ -195,9 +195,13 @@ const createScene = function () {
         }
     }
 
-    // create a sample water drop
-    let _waterdrop = new WaterDrop(scene, [meshes, lights, materials]);
-    objects.push(_waterdrop);
+    // create a sample
+    let pad = new iPad(scene, [meshes, lights, materials]);
+    objects.push(pad);
+    let pen = new Pen(scene, [meshes, lights, materials]);
+    objects.push(pen);
+    let diary = new Diary(scene, [meshes, lights, materials]);
+    objects.push(diary);
 
     return scene;
 };

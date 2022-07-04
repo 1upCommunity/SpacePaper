@@ -1,0 +1,11 @@
+Model Information:
+* title:	Gravity Generator - Space Station Part
+* source:	https://sketchfab.com/3d-models/gravity-generator-space-station-part-6fe80c35f05d43d2a559ad767dec972e
+* author:	Grzybek (https://sketchfab.com/Kapuriada)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Gravity Generator - Space Station Part" (https://sketchfab.com/3d-models/gravity-generator-space-station-part-6fe80c35f05d43d2a559ad767dec972e) by Grzybek (https://sketchfab.com/Kapuriada) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

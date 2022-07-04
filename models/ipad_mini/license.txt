@@ -1,0 +1,11 @@
+Model Information:
+* title:	iPad Mini
+* source:	https://sketchfab.com/3d-models/ipad-mini-1c38ed77f0194b76a4324e4d0ce820c2
+* author:	Polybagel (https://sketchfab.com/sebdevyoutube)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "iPad Mini" (https://sketchfab.com/3d-models/ipad-mini-1c38ed77f0194b76a4324e4d0ce820c2) by Polybagel (https://sketchfab.com/sebdevyoutube) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
