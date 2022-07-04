@@ -31,6 +31,16 @@ class ObjectBase {
     this.move = [
         0, 0, 0
     ]
+
+    this.frame = 0
+    this.seeds = [
+        Math.random()*100,
+        Math.random()*100,
+        Math.random()*100,
+        Math.random()*100,
+        Math.random()*100,
+        Math.random()*100,
+    ]
   }
 
     setPosition(x, y, z) {
@@ -46,39 +56,29 @@ class ObjectBase {
     _update(){}
     
     update(){
+        this.frame += Math.random() * 0.01;
         try{
             if(this.floatmode.float){
-                // get time
-                let time = new Date().getTime() / 4000;
-                let time2 = time * 0.5;
-                let time3 = time * 0.25;
-                let time4 = time * 0.125;
-
                 // get position
-                let x = perlin.get(time, time2)
-                let y = perlin.get(time3, time4)
-                let z = perlin.get(time4, time)
+                let x = perlin.get(this.seeds[0], this.frame)
+                let y = perlin.get(this.seeds[2], this.frame)
+                let z = perlin.get(this.seeds[4], this.frame)
 
                 // set position
-                this.mesh.position.x += x/100;
-                this.mesh.position.y += y/100;
-                this.mesh.position.z += z/100;
+                this.mesh.position.x += x/50;
+                this.mesh.position.y += y/50;
+                this.mesh.position.z += z/50;
             }
             if(this.floatmode.spin_random){
-                let time = new Date().getTime() / 1000000;
-                let time2 = time * 0.5;
-                let time3 = time * 0.25;
-                let time4 = time * 0.125;
-
                 // get spin
-                let x = perlin.get(time, time2) * 360
-                let y = perlin.get(time3, time4) * 360
-                let z = perlin.get(time4, time) * 360
+                let x = perlin.get(this.seeds[1], this.frame) * Math.PI * 2
+                let y = perlin.get(this.seeds[3], this.frame) * Math.PI * 2
+                let z = perlin.get(this.seeds[5], this.frame) * Math.PI * 2
 
                 // set spin
-                this.mesh.rotation.x = x;
-                this.mesh.rotation.y = y;
-                this.mesh.rotation.z = z;
+                this.mesh.rotation.x += x/1000;
+                this.mesh.rotation.y += y/1000;
+                this.mesh.rotation.z += z/1000;
             }
             if(this.floatmode.spin){
                 this.mesh.rotation.x += this.spin[0];
