@@ -12,6 +12,16 @@ class ObjectBase {
         spin_random: false,
     }
 
+    let _light = new BABYLON.HemisphericLight(name, new BABYLON.Vector3(0, 1, 0), scene);
+    _light.diffuse = new BABYLON.Color3(1, 1, 1);
+    _light.specular = new BABYLON.Color3(1, 1, 1);
+    _light.intensity = 1;
+    this.light = _light;
+	
+    for(let i in info[0]){
+        this.light.excludedMeshes.push(info[0][i])
+    }
+
     this.spin = [
         (Math.random() * Math.PI * 2) / 300,
         (Math.random() * Math.PI * 2) / 140,
@@ -79,6 +89,8 @@ class ObjectBase {
             this.setPosition(pos.x + this.move[0], pos.y + this.move[1], pos.z + this.move[2])
 
             this._update()
+
+            this.light.position = this.mesh.position
         } catch {}
     }
 }
