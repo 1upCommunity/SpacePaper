@@ -200,3 +200,29 @@ class Diary extends ObjectBase {
         }.bind(this));
     }
 }
+
+class UI extends ObjectBase {
+    constructor(scene, info) {
+        super("UI", scene, info);
+        this.mesh = null
+        this.loadMesh();
+    }
+
+    async loadMesh(){
+        await BABYLON.SceneLoader.ImportMesh("", "models/scifi-interior/", "scene.gltf", this.scene, function (newMeshes,) {
+            this.mesh = newMeshes[0];
+            this.mesh.rotationQuaternion = null;
+            this.mesh.position.y = -40;
+            this.mesh.position.x = -50;
+            this.mesh.position.z = 20;
+            this.mesh.rotation.y = Math.PI;
+            this.mesh.receiveShadows = true;
+            this.mesh.checkCollisions = true;
+            this.mesh.isPickable = false;
+
+            this.mesh.scaling.x = 0.2;
+            this.mesh.scaling.y = 0.2;
+            this.mesh.scaling.z = 0.02;
+        }.bind(this));
+    }
+}

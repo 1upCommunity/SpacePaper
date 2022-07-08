@@ -62,6 +62,8 @@ let state = {
     alarm: false,
 }
 
+
+let camera = null;
 // Add your code here matching the playground format
 const createScene = function () {
     const scene = new BABYLON.Scene(engine);
@@ -77,71 +79,30 @@ const createScene = function () {
 
     // create the window
     const _window = BABYLON.Mesh.CreateBox("box", 1, scene);
-    _window.scaling.x = 120;
-    _window.scaling.y = 30;
+    _window.scaling.x = 150;
+    _window.scaling.y = 150;
     _window.scaling.z = 0.1;
-    _window.position.z = 0.5;
+    _window.position.z = 25
 
     // create the wall
-    const _walltop = BABYLON.Mesh.CreateBox("walltop", 1, scene);
-    _walltop.scaling.x = 150;
-    _walltop.scaling.y = 10;
-    _walltop.scaling.z = 1;
-    _walltop.position.y = 20;
-
-    const _wallbottom = BABYLON.Mesh.CreateBox("wallbottom", 1, scene);
-    _wallbottom.scaling.x = 150;
-    _wallbottom.scaling.y = 10;
-    _wallbottom.scaling.z = 1;
-    _wallbottom.position.y = -20
-
-    const _wallleft = BABYLON.Mesh.CreateBox("wallleft", 1, scene);
-    _wallleft.scaling.x = 15;
-    _wallleft.scaling.y = 35;
-    _wallleft.scaling.z = 1;
-    _wallleft.position.x = -67.5;
-
-    const _wallright = BABYLON.Mesh.CreateBox("wallright", 1, scene);
-    _wallright.scaling.x = 15;
-    _wallright.scaling.y = 35;
-    _wallright.scaling.z = 1;
-    _wallright.position.x = 67.5;
-
-    const walldown = BABYLON.Mesh.CreateBox("walldown", 1, scene);
-    walldown.scaling.x = 178;
-    walldown.scaling.y = 1;
-    walldown.scaling.z = 150;
-    walldown.position.y = -30;
-    walldown.position.z = -60;
-
     const wallup = BABYLON.Mesh.CreateBox("wallup", 1, scene);
     wallup.scaling.x = 178;
     wallup.scaling.y = 1;
     wallup.scaling.z = 150;
-    wallup.position.y = 30;
+    wallup.position.y = 60;
     wallup.position.z = -60;
 
     meshes.push(_window);
-    meshes.push(_walltop);
-    meshes.push(_wallbottom);
-    meshes.push(_wallleft);
-    meshes.push(_wallright);
-    meshes.push(walldown);
     meshes.push(wallup);
 
     // materials
     createMaterials(scene, meshes, lights);
     _window.material = materials.glass;
-    _walltop.material = materials.plastic;
-    _wallbottom.material = materials.plastic;
-    _wallleft.material = materials.plastic;
-    _wallright.material = materials.plastic;
-    walldown.material = materials.plastic;
     wallup.material = materials.plastic;
     skybox.material = materials.skybox;
     skybox.infiniteDistance = true;
 
-    const camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, -36), scene);
+    camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 10, -45), scene);
 
     var light1 = new BABYLON.PointLight("light", new BABYLON.Vector3(0, 0, 0), scene);
     light1.position = new BABYLON.Vector3(12, 7, 10);
@@ -181,6 +142,8 @@ const createScene = function () {
     objects.push(pen);
     let diary = new Diary(scene, [meshes, lights, materials]);
     objects.push(diary);
+    let _ui = new UI(scene, [meshes, lights, materials]);
+    objects.push(_ui);
 
     // earth
     let earth = new Earth(scene, [meshes, lights, materials]);
@@ -199,10 +162,16 @@ create_scene();
 engine.runRenderLoop(function () {
     scene.render();
 
-    // update the water drop
     for(let i = 0; i < objects.length; i++){
         objects[i].update();
     }
+
+    // get mouse position
+    let _ = [scene.pointerX - scene.getEngine().getRenderWidth() / 2, scene.pointerY - scene.getEngine().getRenderHeight() / 2];
+    camera.position.x = -_[0]/200;
+    camera.position.y = _[1]/200;
+    camera.rotation.x = -_[1]/20000;
+    camera.rotation.y = -_[0]/20000;
 
     if(state.alarm){
         lights[0].intensity = 0.5 + Math.sin(Date.now() / 100) * 0.5;

@@ -45,8 +45,8 @@ class Earth extends PlanetBase {
         await BABYLON.SceneLoader.ImportMesh("", "models/earth/", "scene.gltf", this.scene, function (newMeshes) {
             this.mesh = newMeshes[0];
             this.mesh.rotationQuaternion = null;
-            this.mesh.position.z = 50;
-            this.mesh.position.y = -200;
+            this.mesh.position.z = 180;
+            this.mesh.position.y = -150;
             this.mesh.position.x = 50;
             this.mesh.receiveShadows = true;
             this.mesh.checkCollisions = true;
@@ -60,7 +60,7 @@ class Earth extends PlanetBase {
     }
 
     _update() {
-        this.mesh.rotation.y = new Date().getTime() / 1000000;
+        this.mesh.rotation.y = new Date().getTime() / 500000;
         this.mesh.rotation.x = Math.sin(this.mesh.rotation.y) * 0.1;
         this.mesh.rotation.z = Math.cos(this.mesh.rotation.y) * 0.1;
     }
