@@ -42,7 +42,7 @@ function createMaterials(scene, meshes, lights){
 	glass.diffuseColor = new BABYLON.Color3(0, 0, 0);
 	glass.specularColor = new BABYLON.Color3(0, 0, 0);
     glass.reflectionTexture.level = 1;
-    glass.alpha = 0.2;
+    glass.alpha = 0.1;
     glass.alphaMode = BABYLON.Engine.ALPHA_COMBINE;
 
     var plastic = new BABYLON.StandardMaterial("plastic", scene);
@@ -141,28 +141,7 @@ const createScene = function () {
     skybox.material = materials.skybox;
     skybox.infiniteDistance = true;
 
-    const camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, -38), scene);
-
-    // when the mouse is scrolled, the camera moves
-    scene.onPrePointerObservable.add( function(pointerInfo, eventState) {
-        var event = pointerInfo.event;
-        var delta = 0;
-        if (event.wheelDelta) {
-            delta = event.wheelDelta;
-        }
-        else if (event.detail) {
-            delta = -event.detail;
-        }
-        if (delta) {
-            delta = -delta
-            if(delta > 0 && camera.position.x < 28){
-                gsap.to(camera.position, {duration: 0.5, x: camera.position.x + 10});
-            }
-            else if(delta < 0 && camera.position.x > -27){
-                gsap.to(camera.position, {duration: 0.5, x: camera.position.x - 10});
-            }
-        }
-    }, BABYLON.PointerEventTypes.POINTERWHEEL, false);
+    const camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 0, -36), scene);
 
     var light1 = new BABYLON.PointLight("light", new BABYLON.Vector3(0, 0, 0), scene);
     light1.position = new BABYLON.Vector3(12, 7, 10);
@@ -203,6 +182,10 @@ const createScene = function () {
     let diary = new Diary(scene, [meshes, lights, materials]);
     objects.push(diary);
 
+    // earth
+    let earth = new Earth(scene, [meshes, lights, materials]);
+    objects.push(earth);
+
     return scene;
 };
 
@@ -224,7 +207,7 @@ engine.runRenderLoop(function () {
     if(state.alarm){
         lights[0].intensity = 0.5 + Math.sin(Date.now() / 100) * 0.5;
         scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-        scene.fogDensity = 0.01;
+        scene.fogDensity = 0.003;
         scene.fogColor = new BABYLON.Color3(0.5, 0.5, 0.5);
         scene.fogStart = 0;
         scene.fogEnd = 100;
