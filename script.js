@@ -71,7 +71,8 @@ function getState() {
 
     // alarm state
     let alarmnoise = perlin.get(time / 1000, 0);
-    if (alarmnoise > 0.5) {
+    console.log(alarmnoise);
+    if (alarmnoise > 0.1) {
         state.alarm = true;
     }
 

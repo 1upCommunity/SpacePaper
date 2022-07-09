@@ -11,6 +11,7 @@ class PlanetBase {
       scene
     );
     _light.intensity = 10;
+    _light.includedOnlyMeshes = this.meshes;
     this.lights = [_light];
 
     this.spin = [
@@ -25,7 +26,7 @@ class PlanetBase {
   }
 
   update() {
-    
+    _light.includedOnlyMeshes = this.meshes;
     this.frame += Math.random() * 0.01;
     try {
       for (let i = 0; i < this.meshes.length; i++) {
