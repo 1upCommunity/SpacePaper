@@ -71,7 +71,7 @@ class Sun extends PlanetBase {
       sun.position.y = -180;
       sun.position.x = 50;
 
-      this.addMesh(sun, [0, 0.0000003, 0]);
+      this.addMesh(sun, [0, 0.000001, 0]);
       this.hide()
   }
 }
@@ -98,7 +98,7 @@ class Mercury extends PlanetBase {
       mercury.position.y = -180;
       mercury.position.x = 50;
 
-      this.addMesh(mercury, [0, 0.0000003, 0]);
+      this.addMesh(mercury, [0, 0.000001, 0]);
       this.hide()
   }
 }
@@ -144,7 +144,7 @@ class Venus extends PlanetBase {
       venusAtmosphereMesh.position.y = -180;
       venusAtmosphereMesh.position.x = 50;
 
-      this.addMesh(venus, [0, 0.0000003, 0]);
+      this.addMesh(venus, [0, 0.000001, 0]);
       this.addMesh(venusAtmosphereMesh, [0, 0.0000005, 0]);
       this.hide()
   }
@@ -192,7 +192,7 @@ class Earth extends PlanetBase {
         earthAtmosphereMesh.position.y = -180;
         earthAtmosphereMesh.position.x = 50;
 
-        this.addMesh(earth, [0, 0.0000003, 0]);
+        this.addMesh(earth, [0, 0.000001, 0]);
         this.addMesh(earthAtmosphereMesh, [0, 0.0000005, 0]);
         this.hide()
     }
@@ -220,7 +220,7 @@ class Mars extends PlanetBase {
       mars.position.y = -180;
       mars.position.x = 50;
 
-      this.addMesh(mars, [0, 0.0000003, 0]);
+      this.addMesh(mars, [0, 0.000001, 0]);
       this.hide()
   }
 }
@@ -247,7 +247,7 @@ class Jupiter extends PlanetBase {
       jupiter.position.y = -180;
       jupiter.position.x = 50;
 
-      this.addMesh(jupiter, [0, 0.0000003, 0]);
+      this.addMesh(jupiter, [0, 0.000001, 0]);
       this.hide()
   }
 }
@@ -274,7 +274,7 @@ class Saturn extends PlanetBase {
       saturn.position.y = -180;
       saturn.position.x = 50;
 
-      this.addMesh(saturn, [0, 0.0000003, 0]);
+      this.addMesh(saturn, [0, 0.000001, 0]);
       this.hide()
   }
 }
