@@ -26,7 +26,7 @@ class PlanetBase {
   }
 
   update() {
-    _light.includedOnlyMeshes = this.meshes;
+    this.lights[0].includedOnlyMeshes = this.meshes;
     this.frame += Math.random() * 0.01;
     try {
       for (let i = 0; i < this.meshes.length; i++) {
