@@ -70,14 +70,14 @@ function getState() {
     let time = new Date().getTime();
 
     // alarm state
-    _alarmnoise = perlin.get(time / 1000, 0);
+    let _alarmnoise = perlin.get(time / 1000, 0);
     if (_alarmnoise > 0.5) {
         state.alarm = true;
     }
 
     // set planet value from false, to 0 to 5
-    _planetnoise = perlin.get(time / 1000, 1);
-    console.log(planetnoise);s
+    let _planetnoise = perlin.get(time / 1000, 1);
+    console.log(_planetnoise);
 }
 
 // Add your code here matching the playground format
