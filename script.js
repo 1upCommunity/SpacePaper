@@ -60,10 +60,26 @@ function createMaterials(scene, meshes, lights){
 
 let state = {
     alarm: false,
+    planet: false,
 }
 
 
-let camera = null;
+let camera, _ui, planets;
+
+function getState() {
+    let time = new Date().getTime();
+
+    // alarm state
+    _alarmnoise = perlin.get(time / 1000, 0);
+    if (_alarmnoise > 0.5) {
+        state.alarm = true;
+    }
+
+    // set planet value from false, to 0 to 5
+    _planetnoise = perlin.get(time / 1000, 1);
+    console.log(planetnoise);s
+}
+
 // Add your code here matching the playground format
 const createScene = function () {
     const scene = new BABYLON.Scene(engine);
@@ -108,11 +124,13 @@ const createScene = function () {
     light1.position = new BABYLON.Vector3(12, 7, 10);
     light1.specular = new BABYLON.Color3(1, 1, 1);
     light1.intensity = 1;
+    light1.range = 100;
     lights.push(light1);
     var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 0, 0), scene);
     light2.position = new BABYLON.Vector3(-12, 7, -10);
     light2.specular = new BABYLON.Color3(1, 1, 1);
     light2.intensity = 1;
+    light2.range = 100;
     lights.push(light2);
 
     for(let i = 0; i < meshes.length; i++){
@@ -135,19 +153,13 @@ const createScene = function () {
         }
     }
 
-    // create a sample
-    let pad = new iPad(scene, [meshes, lights, materials]);
-    objects.push(pad);
-    let pen = new Pen(scene, [meshes, lights, materials]);
-    objects.push(pen);
-    let diary = new Diary(scene, [meshes, lights, materials]);
-    objects.push(diary);
-    let _ui = new UI(scene, [meshes, lights, materials]);
+    _ui = new UI(scene, [meshes, lights, materials]);
     objects.push(_ui);
 
-    // earth
-    let earth = new Earth(scene, [meshes, lights, materials]);
-    objects.push(earth);
+    planets = createPlanets(scene);
+    for(let i = 0; i < planets.length; i++){
+        objects.push(planets[i]);
+    }
 
     return scene;
 };
@@ -161,6 +173,19 @@ create_scene();
 // Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function () {
     scene.render();
+
+    getState();
+
+    if(state.planet){
+        planets[state.planet].show()
+
+        for(let i = 0; i < planets.length; i++){
+            if(i != state.planet){
+                planets[i].hide()
+            }
+        }
+    }
+        
 
     for(let i = 0; i < objects.length; i++){
         objects[i].update();

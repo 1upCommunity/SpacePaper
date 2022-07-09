@@ -18,10 +18,8 @@ class ObjectBase {
     _light.intensity = 1;
     this.light = _light;
 	
-    for(let i in info[0]){
-        this.light.excludedMeshes.push(info[0][i])
-    }
-
+    this.light.includedOnlyMeshes.push(this.mesh);
+    
     this.spin = [
         (Math.random() * Math.PI * 2) / 300,
         (Math.random() * Math.PI * 2) / 140,
@@ -212,7 +210,7 @@ class UI extends ObjectBase {
         await BABYLON.SceneLoader.ImportMesh("", "models/scifi-interior/", "scene.gltf", this.scene, function (newMeshes,) {
             this.mesh = newMeshes[0];
             this.mesh.rotationQuaternion = null;
-            this.mesh.position.y = -40;
+            this.mesh.position.y = -50;
             this.mesh.position.x = -50;
             this.mesh.position.z = 20;
             this.mesh.rotation.y = Math.PI;
