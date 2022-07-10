@@ -30,9 +30,11 @@ class PlanetBase {
     this.frame += Math.random() * 0.01;
     try {
       for (let i = 0; i < this.meshes.length; i++) {
-        this.meshes[i].rotation.x = new Date().getTime() * this.spin[i][0];
-        this.meshes[i].rotation.y = new Date().getTime() * this.spin[i][1];
-        this.meshes[i].rotation.z = new Date().getTime() * this.spin[i][2];
+        let _increment = 2;
+
+        this.meshes[i].rotation.x = new Date().getTime() * this.spin[i][0] * _increment;
+        this.meshes[i].rotation.y = new Date().getTime() * this.spin[i][1] * _increment;
+        this.meshes[i].rotation.z = new Date().getTime() * this.spin[i][2] * _increment;
       }
     } catch {}
   }
@@ -50,20 +52,25 @@ class PlanetBase {
   }
 }
 
+let segments = 64;
+
 class Sun extends PlanetBase {
   constructor(scene, info) {
       super("Sun", scene, info);
+      this.load();
+  }
 
+  async load() {
       // ground
-      let sunTexture = new BABYLON.StandardMaterial("sunTexture", this.scene);
-      sunTexture.diffuseTexture = new BABYLON.Texture(
+      let sunTexture = await new BABYLON.StandardMaterial("sunTexture", this.scene);
+      sunTexture.diffuseTexture = await new BABYLON.Texture(
         "./assets/sun.jpg",
         this.scene
       );
 
       let sun = BABYLON.Mesh.CreateSphere(
         "sun",
-        128,
+        segments,
         500,
         this.scene
       );
@@ -80,17 +87,21 @@ class Sun extends PlanetBase {
 class Mercury extends PlanetBase {
   constructor(scene, info) {
       super("Mercury", scene, info);
+      this.load();
+  }
+
+  async load() {
 
       // ground
-      let mercuryTexture = new BABYLON.StandardMaterial("mercuryTexture", this.scene);
-      mercuryTexture.diffuseTexture = new BABYLON.Texture(
+      let mercuryTexture = await new BABYLON.StandardMaterial("mercuryTexture", this.scene);
+      mercuryTexture.diffuseTexture = await new BABYLON.Texture(
         "./assets/mercury.jpg",
         this.scene
       );
 
       let mercury = BABYLON.Mesh.CreateSphere(
         "mercury",
-        128,
+        segments,
         500,
         this.scene
       );
@@ -107,16 +118,20 @@ class Mercury extends PlanetBase {
 class Venus extends PlanetBase {
   constructor(scene, info) {
       super("Venus", scene, info);
+      this.load();
+  }
+
+  async load() {
 
       // ground
-      let venusTexture = new BABYLON.StandardMaterial("venusTexture", this.scene);
-      venusTexture.diffuseTexture = new BABYLON.Texture(
+      let venusTexture = await new BABYLON.StandardMaterial("venusTexture", this.scene);
+      venusTexture.diffuseTexture = await new BABYLON.Texture(
         "./assets/venus.jpg",
         this.scene
       );
       // atmosphere
-      let venusAtmosphere = new BABYLON.StandardMaterial("venusAtmosphere", this.scene);
-      venusAtmosphere.diffuseTexture = new BABYLON.Texture(
+      let venusAtmosphere = await new BABYLON.StandardMaterial("venusAtmosphere", this.scene);
+      venusAtmosphere.diffuseTexture = await new BABYLON.Texture(
         "./assets/venus_atmosphere.jpg",
         this.scene
       );
@@ -125,7 +140,7 @@ class Venus extends PlanetBase {
 
       let venus = BABYLON.Mesh.CreateSphere(
         "venus",
-        128,
+        segments,
         500,
         this.scene
       );
@@ -136,7 +151,7 @@ class Venus extends PlanetBase {
 
       let venusAtmosphereMesh = BABYLON.Mesh.CreateSphere(
         "venusAtmosphere",
-        128,
+        segments,
         505,
         this.scene
       );
@@ -155,16 +170,20 @@ class Venus extends PlanetBase {
 class Earth extends PlanetBase {
     constructor(scene, info) {
         super("Earth", scene, info);
+        this.load();
+  }
+
+  async load() {
 
         // ground
-        let earthTexture = new BABYLON.StandardMaterial("earthTexture", this.scene);
-        earthTexture.diffuseTexture = new BABYLON.Texture(
+        let earthTexture = await new BABYLON.StandardMaterial("earthTexture", this.scene);
+        earthTexture.diffuseTexture = await new BABYLON.Texture(
           "./assets/earth.jpg",
           this.scene
         );
         // atmosphere
-        let earthAtmosphere = new BABYLON.StandardMaterial("earthAtmosphere", this.scene);
-        earthAtmosphere.diffuseTexture = new BABYLON.Texture(
+        let earthAtmosphere = await new BABYLON.StandardMaterial("earthAtmosphere", this.scene);
+        earthAtmosphere.diffuseTexture = await new BABYLON.Texture(
           "./assets/earth_atmosphere.jpg",
           this.scene
         );
@@ -173,7 +192,7 @@ class Earth extends PlanetBase {
 
         let earth = BABYLON.Mesh.CreateSphere(
           "earth",
-          128,
+          segments,
           500,
           this.scene
         );
@@ -184,7 +203,7 @@ class Earth extends PlanetBase {
 
         let earthAtmosphereMesh = BABYLON.Mesh.CreateSphere(
           "earthAtmosphere",
-          128,
+          segments,
           505,
           this.scene
         );
@@ -202,17 +221,21 @@ class Earth extends PlanetBase {
 class Mars extends PlanetBase {
   constructor(scene, info) {
       super("Mars", scene, info);
+      this.load();
+  }
+
+  async load() {
 
       // ground
-      let marsTexture = new BABYLON.StandardMaterial("marsTexture", this.scene);
-      marsTexture.diffuseTexture = new BABYLON.Texture(
+      let marsTexture = await new BABYLON.StandardMaterial("marsTexture", this.scene);
+      marsTexture.diffuseTexture = await new BABYLON.Texture(
         "./assets/mars.jpg",
         this.scene
       );
 
       let mars = BABYLON.Mesh.CreateSphere(
         "mars",
-        128,
+        segments,
         500,
         this.scene
       );
@@ -229,17 +252,21 @@ class Mars extends PlanetBase {
 class Jupiter extends PlanetBase {
   constructor(scene, info) {
       super("Jupiter", scene, info);
+      this.load();
+  }
+
+  async load() {
 
       // ground
-      let jupiterTexture = new BABYLON.StandardMaterial("jupiterTexture", this.scene);
-      jupiterTexture.diffuseTexture = new BABYLON.Texture(
+      let jupiterTexture = await new BABYLON.StandardMaterial("jupiterTexture", this.scene);
+      jupiterTexture.diffuseTexture = await new BABYLON.Texture(
         "./assets/jupiter.jpg",
         this.scene
       );
 
       let jupiter = BABYLON.Mesh.CreateSphere(
         "jupiter",
-        128,
+        segments,
         500,
         this.scene
       );
@@ -256,17 +283,21 @@ class Jupiter extends PlanetBase {
 class Saturn extends PlanetBase {
   constructor(scene, info) {
       super("Saturn", scene, info);
+      this.load();
+  }
+
+  async load() {
 
       // ground
-      let saturnTexture = new BABYLON.StandardMaterial("saturnTexture", this.scene);
-      saturnTexture.diffuseTexture = new BABYLON.Texture(
+      let saturnTexture = await new BABYLON.StandardMaterial("saturnTexture", this.scene);
+      saturnTexture.diffuseTexture = await new BABYLON.Texture(
         "./assets/saturn.jpg",
         this.scene
       );
 
       let saturn = BABYLON.Mesh.CreateSphere(
         "saturn",
-        128,
+        segments,
         500,
         this.scene
       );

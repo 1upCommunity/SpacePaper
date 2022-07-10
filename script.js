@@ -70,10 +70,11 @@ function getState() {
     let time = new Date().getTime();
 
     // alarm state
-    let alarmnoise = perlin.get(time / 1000, 0);
-    console.log(alarmnoise);
-    if (alarmnoise > 0.1) {
+    let alarmnoise = Math.abs(perlin.get(time / 50000, 0));
+    if (alarmnoise < 0.1) {
         state.alarm = true;
+    } else {
+        state.alarm = false;
     }
 
     // set planet value from false, to 0 to 5
@@ -92,6 +93,13 @@ function getState() {
 // Add your code here matching the playground format
 const createScene = function () {
     const scene = new BABYLON.Scene(engine);
+
+    scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
+    scene.fogColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+    scene.fogStart = 0;
+    scene.fogEnd = 100;
+    scene.clearColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+    scene.fogDensity = 0.0;
 
     // create a red ambient light
     let _light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
@@ -133,33 +141,15 @@ const createScene = function () {
     light1.position = new BABYLON.Vector3(12, 7, 10);
     light1.specular = new BABYLON.Color3(1, 1, 1);
     light1.intensity = 1;
-    light1.range = 100;
     lights.push(light1);
     var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 0, 0), scene);
     light2.position = new BABYLON.Vector3(-12, 7, -10);
     light2.specular = new BABYLON.Color3(1, 1, 1);
     light2.intensity = 1;
-    light2.range = 100;
     lights.push(light2);
 
     for(let i = 0; i < meshes.length; i++){
         meshes[i].receiveShadows = true;
-    }
-
-    for(let j = 0; i < lights.length; i++){
-        var generator = new BABYLON.ShadowGenerator(1024, lights[i]);
-        generator.useKernelBlur = true;
-        generator.useBlurExponentialShadowMap = true;
-        generator.blurKernel = 32;
-        generator.blurScale = 2;
-        generator.usePoissonSampling = true;
-        generator.bias = 0.01;
-        generator.forceBackFacesOnly = true;
-        generator.useKernelBlur = true;
-        generator.useBlurExponentialShadowMap = true;
-        for (var i = 0; i < meshes.length; i++) {
-            shadowGenerator.addShadowCaster(meshes[i]);
-        }
     }
 
     _ui = new UI(scene, [meshes, lights, materials]);
@@ -194,7 +184,6 @@ engine.runRenderLoop(function () {
             }
         }
     }
-        
 
     for(let i = 0; i < objects.length; i++){
         objects[i].update();
@@ -202,27 +191,33 @@ engine.runRenderLoop(function () {
 
     // get mouse position
     let _ = [scene.pointerX - scene.getEngine().getRenderWidth() / 2, scene.pointerY - scene.getEngine().getRenderHeight() / 2];
-    camera.position.x = -_[0]/200;
-    camera.position.y = _[1]/200;
-    camera.rotation.x = -_[1]/20000;
-    camera.rotation.y = -_[0]/20000;
+    gsap.to(camera.position, {
+        duration: 0.5,
+        x: -_[0]/200,
+        y: _[1]/200,
+    });
+    gsap.to(camera.rotation, {
+        duration: 0.5,
+        x: -_[1]/20000,
+        y: -_[0]/20000,
+    });
 
     if(state.alarm){
-        lights[0].intensity = 0.5 + Math.sin(Date.now() / 100) * 0.5;
-        scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-        scene.fogDensity = 0.003;
-        scene.fogColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-        scene.fogStart = 0;
-        scene.fogEnd = 100;
-        scene.clearColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+        lights[0].intensity = 0.5 + Math.sin(Date.now() / 100);
+        if(scene.fogDensity != 0.001){
+            gsap.to(scene, {
+                duration: 3,
+                fogDensity:0.001,
+            })
+        }
     } else {
         lights[0].intensity = 0;
-        scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-        scene.fogDensity = 0;
-        scene.fogColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-        scene.fogStart = 0;
-        scene.fogEnd = 100;
-        scene.clearColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+        if(scene.fogDensity != 0){
+            gsap.to(scene, {
+                duration: 3,
+                fogDensity:0,
+            })
+        }
     }
 });
 

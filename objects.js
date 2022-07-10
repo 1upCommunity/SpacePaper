@@ -221,6 +221,10 @@ class UI extends ObjectBase {
             this.mesh.scaling.x = 0.2;
             this.mesh.scaling.y = 0.2;
             this.mesh.scaling.z = 0.02;
+
+            // ambient light
+            var ambient = new BABYLON.HemisphericLight("ambient", new BABYLON.Vector3(0, 1, 0), this.scene)
+            this.ambient_light = ambient;
         }.bind(this));
     }
 }
