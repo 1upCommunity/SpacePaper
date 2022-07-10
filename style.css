@@ -1,0 +1,51 @@
+@keyframes unblur {
+    0% {
+        backdrop-filter: blur(8px)
+    }
+    100% {
+        backdrop-filter: blur(2px)
+    }
+}
+
+@keyframes blur{
+    0% {
+        backdrop-filter: blur(2px)
+    }
+    100% {
+        backdrop-filter: blur(8px)
+    }
+}
+
+.command_window{
+    background-color: #77777722;
+    color: #FFFFFF;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    padding: 5px;
+    width: 25%;
+    height: 95%;
+    overflow: auto;
+    position: absolute;
+    top: 2.5%;
+    left: 72.5%;
+    border-radius: 5px;
+    animation: blur 0.25s ease-in-out;
+    backdrop-filter: blur(8px);
+}
+
+.command_window:hover{
+    background-color: #77777722;
+    color: #FFFFFF;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    padding: 5px;
+    width: 25%;
+    height: 95%;
+    overflow: auto;
+    position: absolute;
+    top: 2.5%;
+    left: 72.5%;
+    border-radius: 5px;
+    animation: unblur 0.25s ease-in-out;
+    backdrop-filter: blur(2px);
+}
