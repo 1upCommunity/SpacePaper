@@ -152,12 +152,14 @@ const createScene = function () {
         meshes[i].receiveShadows = true;
     }
 
-    _ui = new UI(scene, [meshes, lights, materials]);
-    objects.push(_ui);
+    if(!dev){
+        _ui = new UI(scene, [meshes, lights, materials]);
+        objects.push(_ui);
 
-    planets = createPlanets(scene);
-    for(let i = 0; i < planets.length; i++){
-        objects.push(planets[i]);
+        planets = createPlanets(scene);
+        for(let i = 0; i < planets.length; i++){
+            objects.push(planets[i]);
+        }
     }
 
     return scene;
@@ -169,28 +171,8 @@ async function create_scene() {
 }
 create_scene();
 
-// Register a render loop to repeatedly render the scene
-engine.runRenderLoop(function () {
-    scene.render();
-
-    getState();
-
-    if(state.planet){
-        planets[state.planet].show()
-
-        for(let i = 0; i < planets.length; i++){
-            if(i != state.planet){
-                planets[i].hide()
-            }
-        }
-    }
-
-    for(let i = 0; i < objects.length; i++){
-        objects[i].update();
-    }
-
-    // get mouse position
-    let _ = [scene.pointerX - scene.getEngine().getRenderWidth() / 2, scene.pointerY - scene.getEngine().getRenderHeight() / 2];
+window.addEventListener('mousemove', function (e) {
+    let _ = [e.clientX, e.clientY];
     gsap.to(camera.position, {
         duration: 0.5,
         x: -_[0]/200,
@@ -201,22 +183,45 @@ engine.runRenderLoop(function () {
         x: -_[1]/20000,
         y: -_[0]/20000,
     });
+});
 
-    if(state.alarm){
-        lights[0].intensity = 0.5 + Math.sin(Date.now() / 100);
-        if(scene.fogDensity != 0.001){
-            gsap.to(scene, {
-                duration: 3,
-                fogDensity:0.001,
-            })
+// Register a render loop to repeatedly render the scene
+engine.runRenderLoop(function () {
+    scene.render();
+
+    getState();
+
+    if(!dev){
+        if(state.planet){
+            planets[state.planet].show()
+
+            for(let i = 0; i < planets.length; i++){
+                if(i != state.planet){
+                    planets[i].hide()
+                }
+            }
         }
-    } else {
-        lights[0].intensity = 0;
-        if(scene.fogDensity != 0){
-            gsap.to(scene, {
-                duration: 3,
-                fogDensity:0,
-            })
+
+        for(let i = 0; i < objects.length; i++){
+            objects[i].update();
+        }
+
+        if(state.alarm){
+            lights[0].intensity = 0.5 + Math.sin(Date.now() / 100);
+            if(scene.fogDensity != 0.001){
+                gsap.to(scene, {
+                    duration: 3,
+                    fogDensity:0.001,
+                })
+            }
+        } else {
+            lights[0].intensity = 0;
+            if(scene.fogDensity != 0){
+                gsap.to(scene, {
+                    duration: 3,
+                    fogDensity:0,
+                })
+            }
         }
     }
 });

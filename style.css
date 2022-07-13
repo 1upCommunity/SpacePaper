@@ -1,51 +1,92 @@
 @keyframes unblur {
     0% {
-        backdrop-filter: blur(8px)
+        backdrop-filter: blur(8px);
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 195, 255, 0.486);
+    }
+    16% {
+        border-radius: 10px;
     }
     100% {
-        backdrop-filter: blur(2px)
+        backdrop-filter: blur(2px);
+        box-shadow: 0 0 25px rgba(0, 195, 255, 0.486);
     }
 }
 
 @keyframes blur{
     0% {
-        backdrop-filter: blur(2px)
+        backdrop-filter: blur(2px);
+        border-radius: 10px;
+        box-shadow: 0 0 25px rgba(0, 195, 255, 0.486);
+    }
+    16% {
+        border-radius: 5px;
     }
     100% {
-        backdrop-filter: blur(8px)
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 10px rgba(0, 195, 255, 0.486);
     }
 }
 
 .command_window{
     background-color: #77777722;
     color: #FFFFFF;
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Arial", Helvetica, sans-serif;
     font-size: 12px;
     padding: 5px;
     width: 25%;
-    height: 95%;
+    height: 90%;
     overflow: auto;
     position: absolute;
     top: 2.5%;
     left: 72.5%;
     border-radius: 5px;
-    animation: blur 0.25s ease-in-out;
+    animation: blur 0.1s ease-in-out;
     backdrop-filter: blur(8px);
+
+    /*glow effect*/
+    box-shadow: 0 0 10px rgba(0, 195, 255, 0.486);
 }
 
 .command_window:hover{
     background-color: #77777722;
     color: #FFFFFF;
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Arial", Helvetica, sans-serif;
     font-size: 12px;
     padding: 5px;
     width: 25%;
-    height: 95%;
+    height: 90%;
     overflow: auto;
     position: absolute;
     top: 2.5%;
     left: 72.5%;
-    border-radius: 5px;
-    animation: unblur 0.25s ease-in-out;
+    border-radius: 10px;
+    animation: unblur 0.1s ease-in-out;
     backdrop-filter: blur(2px);
+
+    box-shadow: 0 0 25px rgba(0, 195, 255, 0.486);
+}
+
+.datetime{
+    flex:1;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-self: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.time{
+    font-family: "Arial", Helvetica, sans-serif;
+    font-size: 30px;
+    color: #FFFFFF;
+    margin-bottom: -10px;
+}
+
+.date{
+    font-family: "Arial", Helvetica, sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
 }
